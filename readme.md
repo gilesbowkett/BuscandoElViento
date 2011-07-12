@@ -8,7 +8,7 @@ http://peepcode.com/products/postgresql
 usage
 -----
 
-Inherit from BuscandoElViento::Migration instead of ActiveRecord::Migration. The BuscandoElViento version includes additional class methods. For example,
+Inherit from BuscandoMigration instead of ActiveRecord::Migration. The BuscandoElViento version includes additional class methods. For example,
 
     add_search_vector :users, :username, :fuzzy => true
 
@@ -34,7 +34,7 @@ http://peepcode.com/products/postgresql
 wtf? is that name spanish?
 --------------------------
 
-yes. buscando el viento gets its name from a line in a poem by Pablo Neruda.
+yes. "buscando el viento" means "seeking the wind" and gets its name from a line in a poem by Pablo Neruda.
 
     mi voz buscaba el viento para tocar su oido
 
@@ -42,7 +42,7 @@ which means
 
     my voice sought the wind to touch her hearing
 
-there's a nuance here: where in English, you say a person "plays" a musical instrument, in order to bring forth sound, in Spanish, you say a person "touches" a musical instrument.
+(there's a nuance here: where in English, you say a person "plays" a musical instrument, in order to bring forth sound, in Spanish, you say a person "touches" a musical instrument.)
 
 authors
 -------

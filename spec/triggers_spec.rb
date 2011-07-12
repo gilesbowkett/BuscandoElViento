@@ -2,7 +2,7 @@ require File.dirname(__FILE__) + '/spec_helper'
 
 describe BuscandoElViento do
   before(:each) do
-    class SearchMigration < BuscandoElViento::Migration
+    class SearchMigration < BuscandoMigration
     end
   end
 

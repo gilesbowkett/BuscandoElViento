@@ -2,7 +2,7 @@ require File.dirname(__FILE__) + '/spec_helper'
 
 describe BuscandoElViento do
   before(:each) do
-    class SearchMigration < BuscandoElViento::Migration
+    class SearchMigration < BuscandoMigration
     end
   end
 
@@ -10,7 +10,7 @@ describe BuscandoElViento do
     BuscandoElViento.class.should == Module
   end
   it "inherits" do
-    BuscandoElViento::Migration.new.should be_a(ActiveRecord::Migration)
+    BuscandoMigration.new.should be_a(ActiveRecord::Migration)
   end
 end
 
