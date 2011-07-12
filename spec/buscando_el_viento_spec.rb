@@ -13,6 +13,9 @@ describe BuscandoElViento do
     BuscandoElViento::Migration.new.should be_a(ActiveRecord::Migration)
   end
 
+  it "names vectors" do
+    SearchMigration.vector_name(:username).should eq(:username_search_vector)
+  end
   it "auto-adds search vectors" do
     SearchMigration.should_receive(:add_column).with(:users,
                                                      :username_search_vector,
