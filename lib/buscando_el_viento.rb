@@ -22,6 +22,9 @@ tsvector_update_trigger(#{column}_search_vector,
                         #{column});
 TRIGGER
     end
+    def self.remove_trigger(table)
+      execute "DROP TRIGGER IF EXISTS #{table}_search_vector_update on #{table};"
+    end
 
   end
 end
