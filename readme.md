@@ -30,3 +30,10 @@ which means
     my voice sought the wind to touch her hearing
 
 (there's a nuance here: where in English, you say a person "plays" a musical instrument, in order to bring forth sound, in Spanish, you say a person "touches" a musical instrument.)
+
+authors
+-------
+
+Giles Bowkett
+Xavier Shay
+
