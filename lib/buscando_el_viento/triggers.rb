@@ -2,13 +2,19 @@ module BuscandoElViento
   def trigger_name(table, column)
     "#{table}_#{vector_name(column)}_update"
   end
-  def add_trigger(table, column)
+  def add_trigger(table, names)
+    column = case names
+    when String, Symbol
+      names.to_s
+    when Array
+      names.join(", ")
+    end
     execute <<TRIGGER
-CREATE TRIGGER #{trigger_name(table, column)}
+CREATE TRIGGER #{trigger_name(table, names)}
 BEFORE INSERT OR UPDATE
 ON #{table}
 FOR EACH ROW EXECUTE PROCEDURE
-tsvector_update_trigger(#{vector_name(column).to_s},
+tsvector_update_trigger(#{vector_name(names).to_s},
                         'pg_catalog.english',
                         #{column});
 TRIGGER

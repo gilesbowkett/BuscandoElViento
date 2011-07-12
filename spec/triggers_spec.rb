@@ -71,16 +71,20 @@ TRIGGER
     SearchMigration.trigger_name(:posts, attributes).should eq(trigger_name)
   end
   it "creates triggers for multiple combined attributes, as one" do
+    # FIXME: join these multi-line heredocs to eliminate indentation
+    #        before executing, simply because getting the indentation
+    #        right in the specs is an irritating waste of time
     @add_trigger = <<TRIGGER
 CREATE TRIGGER posts_title_body_search_vector_update
 BEFORE INSERT OR UPDATE
-ON users
+ON posts
 FOR EACH ROW EXECUTE PROCEDURE
-tsvector_update_trigger(email_search_vector,
+tsvector_update_trigger(title_body_search_vector,
                         'pg_catalog.english',
-                        email);
+                        title, body);
 TRIGGER
-    # SearchMigration.add_trigger(:posts, [:title, :body])
+    SearchMigration.should_receive(:execute).with(@add_trigger)
+    SearchMigration.add_trigger(:posts, [:title, :body])
   end
 end
 
