@@ -4,18 +4,6 @@ describe BuscandoElViento do
   before(:each) do
     class SearchMigration < BuscandoElViento::Migration
     end
-
-    @add_trigger = <<TRIGGER
-CREATE TRIGGER users_search_vector_update
-BEFORE INSERT OR UPDATE
-ON users
-FOR EACH ROW EXECUTE PROCEDURE
-tsvector_update_trigger(username_search_vector,
-                        'pg_catalog.english',
-                        username);
-TRIGGER
-
-    @drop_trigger = "DROP TRIGGER IF EXISTS users_search_vector_update on users;"
   end
 
   it "exists" do
@@ -39,12 +27,49 @@ TRIGGER
 
   # TODO: enable creating triggers for more than one attribute!
   it "creates triggers" do
+    @add_trigger = <<TRIGGER
+CREATE TRIGGER users_username_search_vector_update
+BEFORE INSERT OR UPDATE
+ON users
+FOR EACH ROW EXECUTE PROCEDURE
+tsvector_update_trigger(username_search_vector,
+                        'pg_catalog.english',
+                        username);
+TRIGGER
     SearchMigration.should_receive(:execute).with(@add_trigger)
     SearchMigration.add_trigger(:users, :username)
   end
+
   it "removes triggers" do
+    @drop_trigger = "DROP TRIGGER IF EXISTS users_search_vector_update on users;"
     SearchMigration.should_receive(:execute).with(@drop_trigger)
     # SearchMigration.remove_trigger(:users, :username) (uncomment when multiple attribute triggers)
     SearchMigration.remove_trigger(:users)
   end
+
+  it "creates triggers for multiple distinct attributes, separately" do
+    @add_trigger = <<TRIGGER
+CREATE TRIGGER users_username_search_vector_update
+BEFORE INSERT OR UPDATE
+ON users
+FOR EACH ROW EXECUTE PROCEDURE
+tsvector_update_trigger(username_search_vector,
+                        'pg_catalog.english',
+                        username);
+TRIGGER
+    SearchMigration.should_receive(:execute).with(@add_trigger)
+    SearchMigration.add_trigger(:users, :username)
+    @add_trigger = <<TRIGGER
+CREATE TRIGGER users_email_search_vector_update
+BEFORE INSERT OR UPDATE
+ON users
+FOR EACH ROW EXECUTE PROCEDURE
+tsvector_update_trigger(email_search_vector,
+                        'pg_catalog.english',
+                        email);
+TRIGGER
+    SearchMigration.should_receive(:execute).with(@add_trigger)
+    SearchMigration.add_trigger(:users, :email)
+  end
+  it "creates triggers for multiple combined attributes, as one"
 end

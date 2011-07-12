@@ -13,7 +13,7 @@ module BuscandoElViento
 
     def self.add_trigger(table, column)
       execute <<TRIGGER
-CREATE TRIGGER #{table}_search_vector_update
+CREATE TRIGGER #{table}_#{column}_search_vector_update
 BEFORE INSERT OR UPDATE
 ON #{table}
 FOR EACH ROW EXECUTE PROCEDURE
