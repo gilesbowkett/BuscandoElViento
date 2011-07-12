@@ -24,12 +24,16 @@ However if you do this
 
 you get the search vector, a database trigger to keep that vector up to date, and an index to make retrieval fast. Use remove_search in the down method, to avoid IrreversibleMigrations. (Buscando doesn't support the "def change" approach yet, although there's no real reason why not.)
 
-tests
------
+tests and specs
+---------------
 
-In order to run your tests, if you use PostgreSQL this way, you'll need to modify how Rails handles schema dumps. See the Postgres PeepCode for more info.
+In order to run your Rails tests, if you use PostgreSQL this way, you'll need to modify how Rails handles schema dumps. See the Postgres PeepCode for more info.
 
 http://peepcode.com/products/postgresql
+
+In terms of the gem's own specs, these could be better. They really just test the implementation, which is to say they verify that calling particular methods on the custom migration invokes particular other methods on the ActiveRecord migration.
+
+This makes the specs fast, and I prefer tests and specs which circumvent the database in most circumstances, but if you're noodling around wondering what kind of patches a project this awesome could possibly need, I'd have a look at verifying that the specs actually result in code which can perform searches properly.
 
 wtf? is that name spanish?
 --------------------------
@@ -49,4 +53,9 @@ authors
 
 Giles Bowkett
 Xavier Shay
+
+license
+-------
+
+MIT License (which document included by reference)
 
