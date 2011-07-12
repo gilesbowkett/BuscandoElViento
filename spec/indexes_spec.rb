@@ -22,10 +22,21 @@ CREATE_INDEX
     SearchMigration.add_index(:users, :username)
   end
 
-  it "names composite indexes for searching multiple attributes"
+  it "names composite indexes for searching multiple attributes" do
+    index_name = "index_posts_on_title_and_body_search_vector"
+    SearchMigration.index_name(:posts, [:title, :body]).should eq(index_name)
+
+    index_name = "index_posts_on_title_and_body_and_topic_search_vector"
+    SearchMigration.index_name(:posts, [:title, :body, :topic]).should eq(index_name)
+  end
   it "creates composite indexes for searching multiple attributes"
   it "removes composite indexes for searching multiple attributes"
 
+  # FIXME: spec cleanup...
+    # this last spec, and a few others like it, are maybe a little dumb. now that
+    # I think of it, I should probably just delete these. to create multiple
+    # distinct indices for searching distinct attributes, or to delete same, you
+    # just call add_index() or remove_index() as appropriate.
   it "creates multiple indexes for searching distinct attributes" do
     create_username_index = <<-CREATE_INDEX
 CREATE INDEX index_users_on_username_search_vector
