@@ -11,6 +11,18 @@ module BuscandoElViento
       remove_column(table, "#{column}_search_vector".to_sym)
     end
 
+    def self.add_trigger(table, column)
+      execute <<TRIGGER
+CREATE TRIGGER #{table}_search_vector_update
+BEFORE INSERT OR UPDATE
+ON #{table}
+FOR EACH ROW EXECUTE PROCEDURE
+tsvector_update_trigger(#{column}_search_vector,
+                        'pg_catalog.english',
+                        #{column});
+TRIGGER
+    end
+
   end
 end
 
