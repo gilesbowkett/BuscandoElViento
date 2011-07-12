@@ -20,9 +20,9 @@ will do the same thing, but with stemming turned off. (Stemming enables "fuzzy" 
 
 However if you do this
 
-    search :users, :username, :fuzzy => true
+    add_search :users, :username, :fuzzy => true
 
-you get the search vector along with a database trigger to keep that vector up to date, and an index to make retrieval fast - and you also get both up and down methods, to avoid IrreversibleMigrations.
+you get the search vector, a database trigger to keep that vector up to date, and an index to make retrieval fast. Use remove_search in the down method, to avoid IrreversibleMigrations. (Buscando doesn't support the "def change" approach yet, although there's no real reason why not.)
 
 tests
 -----
