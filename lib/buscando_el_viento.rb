@@ -1,4 +1,8 @@
+require 'active_record'
+require 'active_record/base' # https://github.com/rails/rails/pull/1999
+
 module BuscandoElViento
-  # Your code goes here...
+  class Migration < ActiveRecord::Migration
+  end
 end
 
