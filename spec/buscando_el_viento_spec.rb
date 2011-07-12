@@ -25,7 +25,6 @@ describe BuscandoElViento do
     SearchMigration.remove_search_vector :users, :username
   end
 
-  # TODO: enable creating triggers for more than one attribute!
   it "creates triggers" do
     @add_trigger = <<TRIGGER
 CREATE TRIGGER users_username_search_vector_update
@@ -41,10 +40,9 @@ TRIGGER
   end
 
   it "removes triggers" do
-    @drop_trigger = "DROP TRIGGER IF EXISTS users_search_vector_update on users;"
+    @drop_trigger = "DROP TRIGGER IF EXISTS users_username_search_vector_update on users;"
     SearchMigration.should_receive(:execute).with(@drop_trigger)
-    # SearchMigration.remove_trigger(:users, :username) (uncomment when multiple attribute triggers)
-    SearchMigration.remove_trigger(:users)
+    SearchMigration.remove_trigger(:users, :username)
   end
 
   it "creates triggers for multiple distinct attributes, separately" do
@@ -70,6 +68,16 @@ tsvector_update_trigger(email_search_vector,
 TRIGGER
     SearchMigration.should_receive(:execute).with(@add_trigger)
     SearchMigration.add_trigger(:users, :email)
+  end
+  it "removes triggers for multiple distinct attributes, separately" do
+    @username_drop_trigger = "DROP TRIGGER IF EXISTS users_username_search_vector_update on users;"
+    @email_drop_trigger = "DROP TRIGGER IF EXISTS users_email_search_vector_update on users;"
+
+    SearchMigration.should_receive(:execute).with(@username_drop_trigger)
+    SearchMigration.remove_trigger(:users, :username)
+
+    SearchMigration.should_receive(:execute).with(@email_drop_trigger)
+    SearchMigration.remove_trigger(:users, :email)
   end
   it "creates triggers for multiple combined attributes, as one"
 end
