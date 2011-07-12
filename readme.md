@@ -1,7 +1,7 @@
 buscando el viento
 ==================
 
-buscando el viento is a search gem for PostgreSQL and Rails 3. It enables full-text searching by automating the process of creating appropriate migrations, and is largely based on Xavier Shay's PeepCode video on Postgres.
+buscando el viento is a search migrations gem for PostgreSQL and Rails 3. It enables full-text searching by automating the process of creating appropriate migrations, and is largely based on Xavier Shay's PeepCode video on Postgres.
 
 http://peepcode.com/products/postgresql
 
