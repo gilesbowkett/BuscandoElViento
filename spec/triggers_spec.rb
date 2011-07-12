@@ -63,6 +63,24 @@ TRIGGER
     SearchMigration.should_receive(:execute).with(@email_drop_trigger)
     SearchMigration.remove_trigger(:users, :email)
   end
-  it "creates triggers for multiple combined attributes, as one"
+
+  # multiple combined attributes, as one
+  it "names triggers with multiple combined attributes" do
+    attributes = [:title, :body]
+    trigger_name = "posts_title_body_search_vector_update"
+    SearchMigration.trigger_name(:posts, attributes).should eq(trigger_name)
+  end
+  it "creates triggers for multiple combined attributes, as one" do
+    @add_trigger = <<TRIGGER
+CREATE TRIGGER posts_title_body_search_vector_update
+BEFORE INSERT OR UPDATE
+ON users
+FOR EACH ROW EXECUTE PROCEDURE
+tsvector_update_trigger(email_search_vector,
+                        'pg_catalog.english',
+                        email);
+TRIGGER
+    # SearchMigration.add_trigger(:posts, [:title, :body])
+  end
 end
 

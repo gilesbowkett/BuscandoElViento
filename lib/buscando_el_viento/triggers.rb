@@ -1,7 +1,13 @@
 module BuscandoElViento
   module Triggers
+    include BuscandoElViento::Vectors
+    # FIXME: I'm including this module because it enables trigger_name to use
+    #        vector_name. however, it's lame to include the module twice, and
+    #        the main file also includes it. so I think I'll keep the distinct
+    #        files but do away with the whole modules thingamabob.
+
     def trigger_name(table, column)
-      "#{table}_#{column}_search_vector_update"
+      "#{table}_#{vector_name(column)}_update"
     end
     def add_trigger(table, column)
       execute <<TRIGGER
