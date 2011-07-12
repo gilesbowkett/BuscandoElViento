@@ -14,19 +14,24 @@ module BuscandoElViento
       remove_column(table, vector_name(column))
     end
 
+    # FIXME: it may be worthwhile to separate these concerns, and their specs, into
+    # distinct sub-modules
+    def self.trigger_name(table, column)
+      "#{table}_#{column}_search_vector_update"
+    end
     def self.add_trigger(table, column)
       execute <<TRIGGER
-CREATE TRIGGER #{table}_#{column}_search_vector_update
+CREATE TRIGGER #{trigger_name(table, column)}
 BEFORE INSERT OR UPDATE
 ON #{table}
 FOR EACH ROW EXECUTE PROCEDURE
-tsvector_update_trigger(#{column}_search_vector,
+tsvector_update_trigger(#{vector_name(column).to_s},
                         'pg_catalog.english',
                         #{column});
 TRIGGER
     end
     def self.remove_trigger(table, column)
-      execute "DROP TRIGGER IF EXISTS #{table}_#{column}_search_vector_update on #{table};"
+      execute "DROP TRIGGER IF EXISTS #{trigger_name(table, column)} on #{table};"
     end
 
   end

@@ -28,6 +28,9 @@ describe BuscandoElViento do
     SearchMigration.remove_search_vector :users, :username
   end
 
+  it "names triggers" do
+    SearchMigration.trigger_name(:users, :username).should eq("users_username_search_vector_update")
+  end
   it "creates triggers" do
     @add_trigger = <<TRIGGER
 CREATE TRIGGER users_username_search_vector_update
