@@ -2,6 +2,8 @@ require File.dirname(__FILE__) + '/spec_helper'
 
 describe BuscandoElViento do
   before(:each) do
+    # FIXME: epic fixme!!! these should be instance methods, not class methods. that
+    #        changed with Rails 3.1
     class SearchMigration < BuscandoMigration
     end
   end
@@ -11,7 +13,7 @@ describe BuscandoElViento do
   end
   it "creates vector names for multiple combined attributes, as one" do
     attributes = [:title, :description]
-    SearchMigration.vector_name(attributes).should eq(:title_description_search_vector)
+    SearchMigration.vector_name(attributes).should eq(:title_and_description_search_vector)
   end
   it "auto-adds search vectors" do
     SearchMigration.should_receive(:add_column).with(:users,

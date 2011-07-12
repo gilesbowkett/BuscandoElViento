@@ -67,7 +67,7 @@ TRIGGER
   # multiple combined attributes, as one
   it "names triggers with multiple combined attributes" do
     attributes = [:title, :body]
-    trigger_name = "posts_title_body_search_vector_update"
+    trigger_name = "posts_title_and_body_search_vector_update"
     SearchMigration.trigger_name(:posts, attributes).should eq(trigger_name)
   end
   it "creates triggers for multiple combined attributes, as one" do
@@ -75,11 +75,11 @@ TRIGGER
     #        before executing, simply because getting the indentation
     #        right in the specs is an irritating waste of time
     @add_trigger = <<TRIGGER
-CREATE TRIGGER posts_title_body_search_vector_update
+CREATE TRIGGER posts_title_and_body_search_vector_update
 BEFORE INSERT OR UPDATE
 ON posts
 FOR EACH ROW EXECUTE PROCEDURE
-tsvector_update_trigger(title_body_search_vector,
+tsvector_update_trigger(title_and_body_search_vector,
                         'pg_catalog.english',
                         title, body);
 TRIGGER

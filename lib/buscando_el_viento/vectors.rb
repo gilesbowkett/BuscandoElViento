@@ -4,7 +4,7 @@ module BuscandoElViento
     when String, Symbol
       "#{name}_search_vector".to_sym
     when Array
-      "#{name.join("_")}_search_vector".to_sym
+      "#{name.join("_and_")}_search_vector".to_sym
     end
   end
   def add_search_vector(table, column)

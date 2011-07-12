@@ -17,4 +17,10 @@ ON #{table}
 USING gin(search_vector);
 ADD_INDEX
   end
+
+  # remove_index gets the job done 9 times out of 10 for this stuff, but it
+  # needs a little assistance on composite indices
+  def remove_composite_index(table, columns)
+    remove_index table, vector_name(columns).to_s
+  end
 end

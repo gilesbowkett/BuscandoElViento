@@ -38,22 +38,18 @@ CREATE_INDEX
     SearchMigration.should_receive(:execute).with(create_index)
     SearchMigration.add_index(:posts, [:title, :body])
   end
-  it "removes composite indexes for searching multiple attributes"
-    # TODO: this spec is pending because I'm not sure how I would specify that a call
-    #       percolate back up to the superclass, and essentially I think the implementation
-    #       for this is roughly:
-    #
-    #       class BuscandoMigration
-    #         def remove_index(table, column)
-    #           super index_name(table, column)
-    #         end
-    #       end
+  it "removes composite indexes for searching multiple attributes" do
+    vector_name = "title_and_body_search_vector"
+    SearchMigration.should_receive(:remove_index).with(:posts, vector_name)
+    SearchMigration.remove_composite_index(:posts, [:title, :body])
+  end
 
   # FIXME: spec cleanup...
     # this last spec, and a few others like it, are maybe a little dumb. now that
     # I think of it, I should probably just delete these. to create multiple
     # distinct indices for searching distinct attributes, or to delete same, you
     # just call add_index() or remove_index() as appropriate.
+
   it "creates multiple indexes for searching distinct attributes" do
     create_username_index = <<-CREATE_INDEX
 CREATE INDEX index_users_on_username_search_vector
