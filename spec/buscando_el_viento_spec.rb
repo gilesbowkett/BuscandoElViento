@@ -12,7 +12,11 @@ describe BuscandoElViento do
   it "auto-adds search vectors" do
     class SearchMigration < BuscandoElViento::Migration; end
 
-    SearchMigration.should_receive(:add_column)
-    SearchMigration.add_search_vector :users, :username, :fuzzy => true
+    SearchMigration.should_receive(:add_column).with(:users,
+                                                     :username_search_vector,
+                                                     "tsvector")
+    SearchMigration.add_search_vector :users,
+                                      :username,
+                                      :fuzzy => true
   end
 end
