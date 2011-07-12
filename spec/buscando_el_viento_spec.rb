@@ -15,8 +15,6 @@ describe BuscandoElViento do
     SearchMigration.should_receive(:add_column).with(:users,
                                                      :username_search_vector,
                                                      "tsvector")
-    SearchMigration.add_search_vector :users,
-                                      :username,
-                                      :fuzzy => true
+    SearchMigration.add_search_vector :users, :username
   end
 end
