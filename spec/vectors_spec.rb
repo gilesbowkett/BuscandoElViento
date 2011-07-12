@@ -9,6 +9,10 @@ describe BuscandoElViento do
   it "names vectors" do
     SearchMigration.vector_name(:username).should eq(:username_search_vector)
   end
+  it "creates vector names for multiple combined attributes, as one" do
+    attributes = [:title, :description]
+    SearchMigration.vector_name(attributes).should eq(:title_description_search_vector)
+  end
   it "auto-adds search vectors" do
     SearchMigration.should_receive(:add_column).with(:users,
                                                      :username_search_vector,
