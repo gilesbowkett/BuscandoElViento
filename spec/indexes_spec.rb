@@ -29,8 +29,25 @@ CREATE_INDEX
     index_name = "index_posts_on_title_and_body_and_topic_search_vector"
     SearchMigration.index_name(:posts, [:title, :body, :topic]).should eq(index_name)
   end
-  it "creates composite indexes for searching multiple attributes"
+  it "creates composite indexes for searching multiple attributes" do
+    create_index = <<-CREATE_INDEX
+CREATE INDEX index_posts_on_title_and_body_search_vector
+ON posts
+USING gin(search_vector);
+CREATE_INDEX
+    SearchMigration.should_receive(:execute).with(create_index)
+    SearchMigration.add_index(:posts, [:title, :body])
+  end
   it "removes composite indexes for searching multiple attributes"
+    # TODO: this spec is pending because I'm not sure how I would specify that a call
+    #       percolate back up to the superclass, and essentially I think the implementation
+    #       for this is roughly:
+    #
+    #       class BuscandoMigration
+    #         def remove_index(table, column)
+    #           super index_name(table, column)
+    #         end
+    #       end
 
   # FIXME: spec cleanup...
     # this last spec, and a few others like it, are maybe a little dumb. now that
