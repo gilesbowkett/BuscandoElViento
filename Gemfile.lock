@@ -24,6 +24,7 @@ GEM
     diff-lcs (1.1.2)
     i18n (0.6.0)
     multi_json (1.0.3)
+    rake (0.8.7)
     rspec (2.6.0)
       rspec-core (~> 2.6.0)
       rspec-expectations (~> 2.6.0)
@@ -40,4 +41,5 @@ PLATFORMS
 DEPENDENCIES
   activerecord (= 3.1.0.rc1)
   buscando_el_viento!
+  rake (= 0.8.7)
   rspec
