@@ -65,7 +65,7 @@ hook a brother up
 Patches requested:
 
   + `setweight()` support (**crucial**)
-  + Rails 3.1 generator
+  + Rails 3.1 generators, both to generate migrations and relevant model finders
   + support for `def change` vs `def up` and `def down`
   + better specs
   + quite frankly, a better understanding of PostgreSQL would be useful
