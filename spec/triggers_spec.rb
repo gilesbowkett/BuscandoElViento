@@ -2,8 +2,6 @@ require File.dirname(__FILE__) + '/spec_helper'
 
 describe BuscandoElViento do
   before(:each) do
-    class SearchMigration < BuscandoMigration
-    end
     @search_migration = SearchMigration.new
   end
 
