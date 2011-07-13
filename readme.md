@@ -12,11 +12,7 @@ Inherit from BuscandoMigration instead of ActiveRecord::Migration. The BuscandoE
 
     add_search_vector :users, :username
 
-will add a search vector attribute to your users table, and obviously
-
-    add_search_vector :users, :username
-
-will do the same thing.
+will add a search vector attribute to your `users` table, tracking the `username` attribute.
 
 However if you do this
 
