@@ -49,8 +49,8 @@ which means
 authors
 -------
 
-Giles Bowkett
-Xavier Shay
+  + Giles Bowkett
+  + Xavier Shay
 
 license
 -------
