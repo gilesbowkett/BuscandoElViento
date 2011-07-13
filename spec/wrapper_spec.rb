@@ -7,7 +7,7 @@ describe BuscandoElViento do
 
   it "adds search, defaulting to exact search" do
     @search_migration.should_receive(:add_search_vector).with(:users, :username)
-    @search_migration.should_receive(:add_trigger).with(:users, :username, {:fuzzy => false})
+    @search_migration.should_receive(:add_trigger).with(:users, :username, :fuzzy => false)
     @search_migration.should_receive(:add_index).with(:users, :username)
 
     @search_migration.add_search :users, :username
