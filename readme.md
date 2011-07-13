@@ -66,6 +66,7 @@ Patches requested:
   + Rails 3.1 generator
   + support for `def change` vs `def up` and `def down`
   + better specs
+  + quite frankly, a better understanding of PostgreSQL would be useful
 
 here be dragons
 ---------------
