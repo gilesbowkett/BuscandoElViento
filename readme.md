@@ -8,7 +8,7 @@ http://peepcode.com/products/postgresql
 usage
 -----
 
-Inherit from BuscandoMigration instead of ActiveRecord::Migration. The BuscandoElViento version includes additional class methods. For example,
+Inherit from `BuscandoMigration` instead of `ActiveRecord::Migration`. The `BuscandoElViento` version includes additional class methods. For example,
 
     add_search_vector :users, :username
 
