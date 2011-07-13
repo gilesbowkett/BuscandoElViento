@@ -1,8 +1,6 @@
 require File.dirname(__FILE__) + '/spec_helper'
 
 describe BuscandoElViento do
-  # FIXME: these specs are sufficiently similar that I should probably be either subclassing
-  #        specs, or bunging this before(:each) in the helper
   before(:each) do
     @search_migration = SearchMigration.new
   end
