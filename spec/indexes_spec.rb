@@ -6,11 +6,12 @@ describe BuscandoElViento do
   before(:each) do
     class SearchMigration < BuscandoMigration
     end
+    @search_migration = SearchMigration.new
   end
 
   it "names indexes" do
     index_name = "index_users_on_username_search_vector"
-    SearchMigration.index_name(:users, :username).should eq(index_name)
+    @search_migration.index_name(:users, :username).should eq(index_name)
   end
   it "creates indexes" do
     create_index = <<-CREATE_INDEX
@@ -18,16 +19,16 @@ CREATE INDEX index_users_on_username_search_vector
 ON users
 USING gin(search_vector);
 CREATE_INDEX
-    SearchMigration.should_receive(:execute).with(create_index)
-    SearchMigration.add_index(:users, :username)
+    @search_migration.should_receive(:execute).with(create_index)
+    @search_migration.add_index(:users, :username)
   end
 
   it "names composite indexes for searching multiple attributes" do
     index_name = "index_posts_on_title_and_body_search_vector"
-    SearchMigration.index_name(:posts, [:title, :body]).should eq(index_name)
+    @search_migration.index_name(:posts, [:title, :body]).should eq(index_name)
 
     index_name = "index_posts_on_title_and_body_and_topic_search_vector"
-    SearchMigration.index_name(:posts, [:title, :body, :topic]).should eq(index_name)
+    @search_migration.index_name(:posts, [:title, :body, :topic]).should eq(index_name)
   end
   it "creates composite indexes for searching multiple attributes" do
     create_index = <<-CREATE_INDEX
@@ -35,13 +36,13 @@ CREATE INDEX index_posts_on_title_and_body_search_vector
 ON posts
 USING gin(search_vector);
 CREATE_INDEX
-    SearchMigration.should_receive(:execute).with(create_index)
-    SearchMigration.add_index(:posts, [:title, :body])
+    @search_migration.should_receive(:execute).with(create_index)
+    @search_migration.add_index(:posts, [:title, :body])
   end
   it "removes composite indexes for searching multiple attributes" do
     vector_name = "title_and_body_search_vector"
-    SearchMigration.should_receive(:remove_index).with(:posts, vector_name)
-    SearchMigration.remove_composite_index(:posts, [:title, :body])
+    @search_migration.should_receive(:remove_index).with(:posts, vector_name)
+    @search_migration.remove_composite_index(:posts, [:title, :body])
   end
 
   # FIXME: spec cleanup...
@@ -56,16 +57,16 @@ CREATE INDEX index_users_on_username_search_vector
 ON users
 USING gin(search_vector);
 CREATE_INDEX
-    SearchMigration.should_receive(:execute).with(create_username_index)
-    SearchMigration.add_index(:users, :username)
+    @search_migration.should_receive(:execute).with(create_username_index)
+    @search_migration.add_index(:users, :username)
 
     create_email_index = <<-CREATE_INDEX
 CREATE INDEX index_users_on_email_search_vector
 ON users
 USING gin(search_vector);
 CREATE_INDEX
-    SearchMigration.should_receive(:execute).with(create_email_index)
-    SearchMigration.add_index(:users, :email)
+    @search_migration.should_receive(:execute).with(create_email_index)
+    @search_migration.add_index(:users, :email)
   end
 end
 

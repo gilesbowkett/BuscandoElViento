@@ -7,6 +7,6 @@ require 'lib/buscando_el_viento/indexes'
 require 'lib/buscando_el_viento/search'
 
 class BuscandoMigration < ActiveRecord::Migration
-  extend BuscandoElViento
+  include BuscandoElViento
 end
 
