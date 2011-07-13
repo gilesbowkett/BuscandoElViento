@@ -11,7 +11,6 @@ describe BuscandoElViento do
   # implementation detail somewhat defeats the purpose of a convenient API in the
   # first place.
 
-    # fuzzy search on/off is solved in the hR2 search spec
   it "enables fuzzy search" do
     fuzzy_trigger = <<TRIGGER
 CREATE TRIGGER posts_title_search_vector_update
