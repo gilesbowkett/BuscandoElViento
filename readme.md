@@ -62,7 +62,7 @@ hook a brother up
 
 Patches requested:
 
-  + `setweight()` support (*crucial*)
+  + `setweight()` support (**crucial**)
   + Rails 3.1 generator
   + support for `def change` vs `def up` and `def down`
   + better specs
