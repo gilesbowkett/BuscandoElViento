@@ -46,6 +46,8 @@ which means
 
 (there's a nuance here: where in English, you say a person "plays" a musical instrument, in order to bring forth sound, in Spanish, you say a person "touches" a musical instrument.)
 
+I chose the name because it annoys me how many APIs use `find` where what they really mean is `seek` or `look for`, and this made me think of how useful it is that Spanish has a commonly-used word which means `to look for something`. In English, we have `look for`, which is not really a word but an idiom, and incorporating prepositions into your code is difficult outside of Smalltalk; meanwhile, `seek` is great, but nobody in the United States seems to use it at all, unless they're hippies seeking for truth or sword-bearing elves seeking the Great Chalice Of Whatever The Fuck.
+
 authors
 -------
 
