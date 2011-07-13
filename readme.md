@@ -20,7 +20,7 @@ However if you do this
 
 you get the search vector, a database trigger to keep that vector up to date, and an index to make retrieval fast.
 
-Obviously the `:fuzzy` flag represents fuzzy versus exact search; this simply turns stemming on or off, although PostgreSQL supports a lot of additional features and options in its full-text search capacities. Use `remove_search` in the `down method`, to avoid `IrreversibleMigrations`. (Buscando doesn't support the `def change` approach yet, although there's no real reason why not.)
+Obviously the `:fuzzy` flag represents fuzzy versus exact search; this simply turns stemming on or off, although PostgreSQL supports a lot of additional features and options in its full-text search capacities. Use `remove_search` in the `down` method, to avoid `IrreversibleMigrations`. (Buscando doesn't support the `def change` approach yet, although there's no real reason why not.)
 
 tests and specs
 ---------------
