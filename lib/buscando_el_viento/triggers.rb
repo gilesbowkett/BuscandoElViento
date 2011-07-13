@@ -2,8 +2,8 @@ module BuscandoElViento
   def trigger_name(table, column)
     "#{table}_#{vector_name(column)}_update"
   end
-  def add_trigger(table, names, options = {:stemming => false})
-    dictionary = if options[:stemming]
+  def add_trigger(table, names, options = {:fuzzy => false})
+    dictionary = if options[:fuzzy]
       "english"
     else
       "simple"

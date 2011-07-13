@@ -10,19 +10,19 @@ usage
 
 Inherit from BuscandoMigration instead of ActiveRecord::Migration. The BuscandoElViento version includes additional class methods. For example,
 
-    add_search_vector :users, :username, :fuzzy => true
+    add_search_vector :users, :username
 
 will add a search vector attribute to your users table, and obviously
 
-    add_search_vector :users, :username, :fuzzy => false
+    add_search_vector :users, :username
 
-will do the same thing, but with stemming turned off. (Stemming enables "fuzzy" search.)
+will do the same thing.
 
 However if you do this
 
     add_search :users, :username, :fuzzy => true
 
-you get the search vector, a database trigger to keep that vector up to date, and an index to make retrieval fast. Use remove_search in the down method, to avoid IrreversibleMigrations. (Buscando doesn't support the "def change" approach yet, although there's no real reason why not.)
+you get the search vector, a database trigger to keep that vector up to date, and an index to make retrieval fast. Obviously the `:fuzzy` flag represents fuzzy versus exact search; this simply turns stemming on or off, although PostgreSQL supports a lot of additional features and options in its full-text search capacities. Use remove_search in the down method, to avoid IrreversibleMigrations. (Buscando doesn't support the `def change` approach yet, although there's no real reason why not.)
 
 tests and specs
 ---------------
@@ -58,4 +58,14 @@ license
 -------
 
 MIT License (which document included by reference)
+
+hook a brother up
+-----------------
+
+Patches requested:
+
+  + `setweight()` support (*crucial*)
+  + Rails 3.1 generator
+  + support for `def change` vs `def up` and `def down`
+  + better specs
 

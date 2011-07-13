@@ -10,7 +10,8 @@ describe BuscandoElViento do
   # fuzzy search methods, in practice, only affect the definition of the DB trigger;
   # however, I think requiring the downstream programmer to remember that kind of
   # implementation detail somewhat defeats the purpose of a convenient API in the
-  # first place.
+  # first place. BUT, since nobody's perfect, the search wrapper spec also contains a
+  # *tiny* bit of fuzzy-related whatnot.
 
   it "enables fuzzy search" do
     fuzzy_trigger = <<TRIGGER
@@ -23,7 +24,7 @@ tsvector_update_trigger(title_search_vector,
                         title);
 TRIGGER
     @search_migration.should_receive(:execute).with(fuzzy_trigger)
-    @search_migration.add_trigger(:posts, :title, :stemming => true)
+    @search_migration.add_trigger(:posts, :title, :fuzzy => true)
   end
   it "disables fuzzy search" do
     exact_trigger = <<TRIGGER
@@ -36,7 +37,7 @@ tsvector_update_trigger(title_search_vector,
                         title);
 TRIGGER
     @search_migration.should_receive(:execute).with(exact_trigger)
-    @search_migration.add_trigger(:posts, :title, :stemming => false)
+    @search_migration.add_trigger(:posts, :title, :fuzzy => false)
   end
   it "defaults to exact search" do
     exact_trigger = <<TRIGGER
