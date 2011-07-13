@@ -16,7 +16,7 @@ BEFORE INSERT OR UPDATE
 ON users
 FOR EACH ROW EXECUTE PROCEDURE
 tsvector_update_trigger(username_search_vector,
-                        'pg_catalog.english',
+                        'pg_catalog.simple',
                         username);
 TRIGGER
     SearchMigration.should_receive(:execute).with(@add_trigger)
@@ -36,7 +36,7 @@ BEFORE INSERT OR UPDATE
 ON users
 FOR EACH ROW EXECUTE PROCEDURE
 tsvector_update_trigger(username_search_vector,
-                        'pg_catalog.english',
+                        'pg_catalog.simple',
                         username);
 TRIGGER
     SearchMigration.should_receive(:execute).with(@add_trigger)
@@ -47,7 +47,7 @@ BEFORE INSERT OR UPDATE
 ON users
 FOR EACH ROW EXECUTE PROCEDURE
 tsvector_update_trigger(email_search_vector,
-                        'pg_catalog.english',
+                        'pg_catalog.simple',
                         email);
 TRIGGER
     SearchMigration.should_receive(:execute).with(@add_trigger)
@@ -80,7 +80,7 @@ BEFORE INSERT OR UPDATE
 ON posts
 FOR EACH ROW EXECUTE PROCEDURE
 tsvector_update_trigger(title_and_body_search_vector,
-                        'pg_catalog.english',
+                        'pg_catalog.simple',
                         title, body);
 TRIGGER
     SearchMigration.should_receive(:execute).with(@add_trigger)
