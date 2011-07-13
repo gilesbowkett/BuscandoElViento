@@ -22,7 +22,9 @@ However if you do this
 
     add_search :users, :username, :fuzzy => true
 
-you get the search vector, a database trigger to keep that vector up to date, and an index to make retrieval fast. Obviously the `:fuzzy` flag represents fuzzy versus exact search; this simply turns stemming on or off, although PostgreSQL supports a lot of additional features and options in its full-text search capacities. Use remove_search in the down method, to avoid IrreversibleMigrations. (Buscando doesn't support the `def change` approach yet, although there's no real reason why not.)
+you get the search vector, a database trigger to keep that vector up to date, and an index to make retrieval fast.
+
+Obviously the `:fuzzy` flag represents fuzzy versus exact search; this simply turns stemming on or off, although PostgreSQL supports a lot of additional features and options in its full-text search capacities. Use remove_search in the down method, to avoid IrreversibleMigrations. (Buscando doesn't support the `def change` approach yet, although there's no real reason why not.)
 
 tests and specs
 ---------------
@@ -68,4 +70,9 @@ Patches requested:
   + Rails 3.1 generator
   + support for `def change` vs `def up` and `def down`
   + better specs
+
+here be dragons
+---------------
+
+This gem is still very early days status. May explode unexpectedly. Do not taunt Happy Fun Ball.
 
