@@ -1,11 +1,10 @@
 require 'active_record'
 require 'active_record/base' # https://github.com/rails/rails/pull/1999
 
-# TODO: http://gilesbowkett.blogspot.com/2009/04/unshiftfiledirnamefile.html
-require 'lib/buscando_el_viento/vectors'
-require 'lib/buscando_el_viento/triggers'
-require 'lib/buscando_el_viento/indexes'
-require 'lib/buscando_el_viento/search'
+require File.dirname(__FILE__) + '/buscando_el_viento/vectors'
+require File.dirname(__FILE__) + '/buscando_el_viento/triggers'
+require File.dirname(__FILE__) + '/buscando_el_viento/indexes'
+require File.dirname(__FILE__) + '/buscando_el_viento/search'
 
 class BuscandoMigration < ActiveRecord::Migration
   include BuscandoElViento
