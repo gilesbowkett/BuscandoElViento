@@ -1,6 +1,7 @@
 require 'active_record'
 require 'active_record/base' # https://github.com/rails/rails/pull/1999
 
+# TODO: http://gilesbowkett.blogspot.com/2009/04/unshiftfiledirnamefile.html
 require 'lib/buscando_el_viento/vectors'
 require 'lib/buscando_el_viento/triggers'
 require 'lib/buscando_el_viento/indexes'
