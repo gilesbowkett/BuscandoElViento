@@ -5,6 +5,11 @@ buscando el viento is a search migrations gem for PostgreSQL and Rails 3. It ena
 
 http://peepcode.com/products/postgresql
 
+install
+-------
+
+`gem install buscando_el_viento`
+
 usage
 -----
 
