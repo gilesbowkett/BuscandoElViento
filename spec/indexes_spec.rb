@@ -6,6 +6,8 @@ describe BuscandoElViento do
   end
 
   it "names indexes" do
+    # fffffffuuuuuuuuuu http://bit.ly/pDHCNe
+    # TODO: FIXME
     index_name = "index_users_on_username_search_vector"
     @search_migration.index_name(:users, :username).should eq(index_name)
   end
