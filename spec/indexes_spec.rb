@@ -40,8 +40,8 @@ CREATE_INDEX
   end
 
   it "removes composite indexes for searching multiple attributes" do
-    index_name = "index_posts_on_title_and_body"
-    @search_migration.should_receive(:remove_index).with(:posts, :name => index_name)
+    remove_index = "DROP INDEX index_posts_on_title_and_body ON posts"
+    @search_migration.should_receive(:execute).with(remove_index)
     @search_migration.remove_gin_index(:posts, [:title, :body])
   end
 

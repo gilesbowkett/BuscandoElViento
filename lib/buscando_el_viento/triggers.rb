@@ -16,7 +16,7 @@ module BuscandoElViento
     when Array
       names.join(", ")
     end
-    execute <<TRIGGER
+    execute <<-TRIGGER
 CREATE TRIGGER #{trigger_name(table, names)}
 BEFORE INSERT OR UPDATE
 ON #{table}

@@ -9,7 +9,7 @@ describe BuscandoElViento do
     @search_migration.trigger_name(:users, :username).should eq("users_username_search_vector_update")
   end
   it "creates triggers" do
-    @add_trigger = <<TRIGGER
+    @add_trigger = <<-TRIGGER
 CREATE TRIGGER users_username_search_vector_update
 BEFORE INSERT OR UPDATE
 ON users

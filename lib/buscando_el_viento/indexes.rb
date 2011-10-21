@@ -24,7 +24,7 @@ ADD_INDEX
   # needs a little assistance on composite indices
   def remove_gin_index(table, columns)
     column = column_name_for(columns)
-    remove_index table, :name => index_name(table, column)
+    execute "DROP INDEX #{index_name(table, column)} ON #{table}"
   end
 
 end
