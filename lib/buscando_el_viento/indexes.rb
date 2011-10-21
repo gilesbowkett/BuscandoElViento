@@ -20,11 +20,11 @@ USING gin(#{column});
 ADD_INDEX
   end
 
-  # remove_index gets the job done 9 times out of 10 for this stuff, but it
-  # needs a little assistance on composite indices
+  # Remove_index Rails syntax doesnt work in PostgreSQL.
+  # You dont need the "ON {table}" (http://www.commandprompt.com/ppbook/r26357)
   def remove_gin_index(table, columns)
     column = column_name_for(columns)
-    execute "DROP INDEX #{index_name(table, column)} ON #{table}"
+    execute "DROP INDEX #{index_name(table, column)}"
   end
 
 end
