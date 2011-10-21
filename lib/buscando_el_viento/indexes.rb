@@ -24,7 +24,7 @@ ADD_INDEX
   # You dont need the "ON {table}" (http://www.commandprompt.com/ppbook/r26357)
   def remove_gin_index(table, columns)
     column = column_name_for(columns)
-    execute "DROP INDEX IF EXISTS #{index_name(table, column)}"
+    execute "DROP INDEX IF EXISTS #{index_name(table, column)};"
   end
 
 end
