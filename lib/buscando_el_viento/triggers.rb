@@ -21,7 +21,7 @@ CREATE TRIGGER #{trigger_name(table, names)}
 BEFORE INSERT OR UPDATE
 ON #{table}
 FOR EACH ROW EXECUTE PROCEDURE
-tsvector_update_trigger(#{vector_search_column_name_for(names).to_s},
+tsvector_update_trigger(#{vector_search_column_name_for(names)},
                         'pg_catalog.#{dictionary}',
                         #{column});
 TRIGGER
