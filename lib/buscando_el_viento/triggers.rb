@@ -1,7 +1,8 @@
 module BuscandoElViento
   def trigger_name(table, column)
-    "#{table}_#{vector_name(column)}_update"
+    "#{table}_#{vector_search_column_name_for(column)}_update"
   end
+
   def add_trigger(table, names, options = {:fuzzy => false})
     dictionary = if options[:fuzzy]
       "english"
@@ -15,16 +16,17 @@ module BuscandoElViento
     when Array
       names.join(", ")
     end
-    execute <<TRIGGER
+    execute <<-TRIGGER
 CREATE TRIGGER #{trigger_name(table, names)}
 BEFORE INSERT OR UPDATE
 ON #{table}
 FOR EACH ROW EXECUTE PROCEDURE
-tsvector_update_trigger(#{vector_name(names).to_s},
+tsvector_update_trigger(#{vector_search_column_name_for(names)},
                         'pg_catalog.#{dictionary}',
                         #{column});
 TRIGGER
   end
+
   def remove_trigger(table, column)
     execute "DROP TRIGGER IF EXISTS #{trigger_name(table, column)} on #{table};"
   end

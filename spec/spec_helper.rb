@@ -1,5 +1,7 @@
-require File.expand_path("lib/buscando_el_viento")
-%w{rubygems active_record}.each {|lib| require lib}
+$LOAD_PATH.unshift File.join(File.dirname(__FILE__), '..', 'lib')
+%w{rubygems buscando_el_viento}.each {|lib| require lib}
 
-class SearchMigration < BuscandoMigration; end
 
+class SearchMigration
+  include BuscandoElViento
+end
